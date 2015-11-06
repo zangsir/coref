@@ -1,6 +1,9 @@
+#this script takes a coref file of OntoNotes format, clean it (strip the empty categories and etc), then output to html
 from collections import Counter
 from xml.dom import minidom
 import sys
+import processGold as prep
+
 
 def print_node_html(root,rid):
     """traverse the entire xml DOM and print out everything with html element tags"""
@@ -26,6 +29,9 @@ def print_node_html(root,rid):
                 #cid=node.attributes['ID'].value
                 print "</div>"
 
+def process(file):
+    cf=prep.mainPreprocess(file)
+    return cf
 
 #usage of print_node_html
 header="""<html>
@@ -44,14 +50,19 @@ footer="""
 </body>
 </html>"""
 
+#clean file first to remove empty categories, etc
 
 
+
+
+#print output html
 #header boilerplate
 print header
 
 #parse and print the body of html
 xmlfile=sys.argv[1]
-xmldoc = minidom.parse(xmlfile)
+#xmldoc = minidom.parse(xmlfile)
+xmldoc=process(xmlfile)
 root = xmldoc.documentElement
 rootn=root.childNodes[1]
 rid=Counter()

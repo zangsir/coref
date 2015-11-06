@@ -42,16 +42,10 @@ def addNewlineAfter(text):
     return new
 
 def mainPreprocess(filen):
+    """preprocess OntoNotes gold files by cleaning up the empty categories and more"""
     #filen=sys.argv[1]
     noemp=removeEmptyCat(filen)
     noempi=noemp[:-2]
     a=xml.dom.minidom.parseString(noempi)
     #pretty_xml_as_string = a.toprettyxml()
     return a
-    
-    
-    
-    
-    
-#except IndexError:
-#    print "Missing argument: this script taks one argument, the xml coref file"
