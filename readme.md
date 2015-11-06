@@ -16,7 +16,7 @@ alternatively, to run it with a print option will take one file (.coref) as inpu
 
 Note: html file must be placed in the correct directory together with the javascript and css files for correct visualization of coreference.
 
-Usage take one input file and redirect the stdout to a file:
+Usage (take one input file and redirect the stdout to a file):
 
 <code>$ python OntoToHtml.py 11docsonly/wsj_0120.coref >>html_ex/wsj_0120_gold.html</code>
 
