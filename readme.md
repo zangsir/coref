@@ -20,8 +20,8 @@ Usage (take one input file and redirect the stdout to a file):
 
 <code>$ python OntoToHtml.py 11docsonly/wsj_0120.coref >>html_ex/wsj_0120_gold.html</code>
 
-if no redirection is used, currently will print html to stdout. To batch process all coref gold files in a directory, use the shell script provided, modify it to suit your directory name:
+if no redirection is used, currently will print html to stdout. To batch process all coref gold files in a directory, use the shell script provided, modify it to suit your directory name (below shows usage on UNIX bash):
 
-<code>$exec ./OntoConll.sh</code>
+<code> $ exec ./OntoConll.sh</code>
 
 
