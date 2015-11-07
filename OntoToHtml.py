@@ -17,7 +17,7 @@ def print_node_html(root,rid):
                 rid[id]+=1
                 cid=node.attributes['ID'].value
                 #print node
-                print '<div id="referent_'+str(rid[id]) +"""" onmouseover="highlight_group('"""+ cid + """')" onmouseout="unhighlight_group('""" +   cid   + """')" class="referent" group=\"""" + cid +'">' + cloud    
+                print '<div id="referent_'+str(rid[id]) +"""" onmouseover="highlight_group('"""+ cid + """')" onmouseout="unhighlight_group('""" +   cid   + """')" class="referent" group=\"""" + cid +'" antecedent="x">' + cloud    
             text=node.nodeValue
 
             #node is plain text
@@ -42,11 +42,13 @@ header="""<html>
 <body>
 <script src="./script/jquery-1.11.3.min.js"></script>
 <script src="./script/chroma.min.js"></script>
-<script src="./script/renner.js"></script>
+<script src="./script/xrenner.js"></script>
 
 """
 
 footer="""
+<script>colorize();</script>
+
 </body>
 </html>"""
 
