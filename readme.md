@@ -25,3 +25,16 @@ if no redirection is used, currently will print html to stdout. To batch process
 <code> $ exec ./OntoConll.sh</code>
 
 
+<h2> 3. Extract all book titles from the constituent parse tree files</h2>
+
+This will output only unique titles existing in the text. 
+
+Usage: 
+
+(1) In "file" -f mode, extract and output (to stdout) all book titles from one .parse file, and redirect the output to a text file using:
+
+<code>$ python extractTTL.py -f const_parses/wsj_0037.parse >> 0037_titles.txt</code>
+
+(2) In "directory" -d mode, extract and output (to stdout) all book titles from all .parse files under the specified directory, and redirect the output to a text file using:
+
+<code>$ python extractTTL.py -d const_parses/ >> all_titles.txt </code>
