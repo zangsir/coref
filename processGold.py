@@ -19,7 +19,7 @@ def removeEmptyCat(filename):
     tokens = re.split(' |\n',insAfter)   
     new=""
     for tok in tokens:
-        star=re.search("\*",tok)
+        star=re.search(r"(^|[^\\])\*",tok)
         if not star and tok!="0":
             new=new+" "+tok
             
