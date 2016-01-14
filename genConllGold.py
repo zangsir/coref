@@ -25,6 +25,7 @@ def writeOneFile(output, outName, firstname):
     g.write(header)
     for line in output:
         g.write(line+'\n')
+    g.write("# end document "+ firstname +"\n")
     g.close()
 
 #single file mode, print to console, or use shell to redirect to a file
