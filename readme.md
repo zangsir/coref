@@ -15,6 +15,10 @@ alternatively, to run it with a print option will take one file (.coref) as inpu
 
 (or to use -w in this case to write output to one file)
 
+There is also a simple script, formatXML.py, to output the well formatted (indented) gold file as xml, for instance:
+
+<code>$ python formatXML.py wsj_2321.coref >> wsj21.xml </code>
+
 <h2> 2. Output OntoNotes gold file to html </h2>
 
 Note: html file must be placed in the correct directory together with the javascript and css files for correct visualization of coreference.
@@ -41,3 +45,4 @@ Usage:
 (2) In "directory" -d mode, extract and output (to stdout) all book titles from all .parse files under the specified directory, and redirect the output to a text file using:
 
 <code>$ python extractTTL.py -d const_parses/ >> all_titles.txt </code>
+
