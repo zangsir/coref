@@ -6,11 +6,14 @@ Multiple gold files from the ./11docs/ directory will be read.Output will be one
 Note that due to restricted license on the OntoNotes and PennTreeBank, the actual documents will not be included here.
 
 Usage:
+
 to run it on a directory 11docs/ and write to one output file (11docs containing all ontoNotes gold .coref files): <br>
 <code>python genConllGold.py -w 11docs/</code>
 
 alternatively, to run it with a print option will take one file (.coref) as input and output the converted format into the stdout, for example:
 <br><code>python genConllGold.py -p wsj_0120.coref</code>
+
+(or to use -w in this case to write output to one file)
 
 <h2> 2. Output OntoNotes gold file to html </h2>
 
