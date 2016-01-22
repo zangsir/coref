@@ -38,7 +38,7 @@ if os.path.isfile(inputname):
         for i in outlist:
             print i
     elif mode=="-w":
-        writeOneFile(outlist,firstname+'_gold.response')
+        writeOneFile(outlist,firstname+'_gold.response',firstname)
 
     
 #directory mode main: append all outputs to one file    
