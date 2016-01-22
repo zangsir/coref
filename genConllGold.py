@@ -1,4 +1,4 @@
-#main script for generating gold response files of OntoNOtes 5 from the coref files. write to one file for all docs in directory. need 2 args: modes (-p or -w) and file name if p, dir name if w
+#main script for generating gold key files of OntoNOtes 5 from the coref files. write to one file for all docs in directory. need 2 args: modes (-p or -w) and file name if p, dir name if w
 import ontoConvertConll as onto
 import processGold as prep
 import sys,os
@@ -8,7 +8,7 @@ from os import listdir
 mode=sys.argv[1]
 inputname=sys.argv[2]
 
-newfile="ontoGoldAll.response"
+newfile="ontoGoldAll.key"
 g=open(newfile,"w")
 g.close()
 
@@ -38,7 +38,7 @@ if os.path.isfile(inputname):
         for i in outlist:
             print i
     elif mode=="-w":
-        writeOneFile(outlist,firstname+'_gold.response',firstname)
+        writeOneFile(outlist,firstname+'_gold.key',firstname)
 
     
 #directory mode main: append all outputs to one file    
