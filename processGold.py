@@ -47,5 +47,7 @@ def mainPreprocess(filen):
     noemp=removeEmptyCat(filen)
     noempi=noemp[:-2]
     a=xml.dom.minidom.parseString(noempi)
+    #to use this module to output a formatted xml for viewing, do:
     #pretty_xml_as_string = a.toprettyxml()
+    #print pretty_xml_as_string
     return a
