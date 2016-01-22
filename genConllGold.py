@@ -9,8 +9,8 @@ mode=sys.argv[1]
 inputname=sys.argv[2]
 
 newfile="ontoGoldAll.key"
-g=open(newfile,"w")
-g.close()
+#g=open(newfile,"w")
+#g.close()
 
 def process(file):
     cf=prep.mainPreprocess(file)
