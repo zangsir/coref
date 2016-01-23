@@ -46,3 +46,10 @@ Usage:
 
 <code>$ python extractTTL.py -d const_parses/ >> all_titles.txt </code>
 
+<h2> 4. More Preprocessing for OntoNotes gold files: nested markable removal and kill singleton (ref. sec.23 of wsj) </h2>
+
+Nested markable is a markable inside another markable with the same ID. After the inner redundant markable is removed, we check if outter markable becomes a singleton - at which occasion we also remove the outter markable. This is in accordance with the OntoNotes coref guidelines. 
+
+Example Usage:
+
+<code> $ python rmNestKilSg.py wsj_2320.coref >> wsj_2320_new.coref </code>
