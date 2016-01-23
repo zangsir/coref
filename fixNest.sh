@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in coref23/rmNested/*.coref
+for i in coref23/*.coref
 
 do
 	filename=$i
@@ -9,8 +9,8 @@ do
 	#filename=$(basename "$fullfile")
 	extension="${filename##*.}"
 	firstname="${filename%.*}"
-	newfile=$firstname"_gold.html"
+	newfile=$firstname"_rmNest.coref"
 	echo $newfile
 	#python processGold.py $filename | python ontoConvertConll.py - >> $newfile
-	python OntoToHtml.py $filename >> $newfile 
+	python rmNestKilSg.py $filename >> $newfile 
 done

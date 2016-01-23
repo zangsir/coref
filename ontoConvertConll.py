@@ -26,7 +26,8 @@ def traverse_node(root):
             if node.nodeType == node.ELEMENT_NODE:
                 cid=node.attributes['ID'].value
                 # Make IDs like 'wsj_1234.sgm-E1' be strictly numeric by collapsing them into just the numbers
-                cid=re.sub(r'wsj_([0-9]+).+-[A-Z]([0-9])',r'\1\2',cid)
+                # also there are IDs like "wsj_2325-E3", so use * here
+                cid=re.sub(r'wsj_([0-9]+).*-[A-Z]([0-9])',r'\1\2',cid)
                 output.append("("+cid)
             text=node.nodeValue
             if text:
