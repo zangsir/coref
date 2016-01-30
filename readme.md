@@ -27,7 +27,7 @@ Usage (take one input file and redirect the stdout to a file):
 
 <code>$ python OntoToHtml.py 11docsonly/wsj_0120.coref >>html_ex/wsj_0120_gold.html</code>
 
-if no redirection is used, currently will print html to stdout. To batch process all coref gold files in a directory, use the shell script provided, modify it to suit your directory name (below shows usage on UNIX bash):
+if no redirection is used, currently will print html to stdout. To batch process all coref gold files in a directory, use the shell script provided, after modifying it to suit your directory name (below shows usage on UNIX bash):
 
 <code> $ exec ./OntoConll.sh</code>
 
@@ -53,3 +53,7 @@ Nested markable is a markable inside another markable with the same ID. After th
 Example Usage:
 
 <code> $ python rmNestKilSg.py wsj_2320.coref >> wsj_2320_new.coref </code>
+
+To batch process, use the shell script (Bash on mac) after you've modified the input directory where all the original .coref gold files are located:
+
+<code> $ exec ./fixNest.sh </code>
