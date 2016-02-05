@@ -57,3 +57,20 @@ Example Usage:
 To batch process, use the shell script (Bash on mac) after you've modified the input directory where all the original .coref gold files are located:
 
 <code> $ exec ./fixNest.sh </code>
+
+
+<h2> 5. Adding coref information to coreNLP conll input </h2>
+
+Currently there is no easy way to output coref chains from dcoref using Stanford CoreNLP. You can output conll files using CoreNLP but there is no coref chain columns despite it is included in the list of annotators. Alternatively, by default you can output xml files from CoreNLP and it does contain coref chain info if it is indeed in the specified. In this task, we take both formats of output (.cnoll and .xml) and use a simple python script to add the coref chain info from the xml back to the conll files in the last column. Note that it takes plain text of OnteNotes files, one sentence per line, with the OnteNotes tokenization. 
+
+Usage:
+
+<code> $ python coreNLP_conll.py path/to/conll/file path/to/xml/file </code>
+
+This will write output the complete conll file on the stdout. 
+
+If you wish to do batch processing, i.e., read a directory of OntoNotes plain text files, then you can use the bash shell script provided:
+
+<code> $ exec ./coreNLPConll.sh </code>
+
+And this will write complete conll output for all documents into one output conll file, approprite for evaluation using the conll11,12 shared task scorer script. In the big output file, each document is marked by comments for beginning and ending of the document.
