@@ -8,7 +8,7 @@ from os import listdir
 mode=sys.argv[1]
 inputname=sys.argv[2]
 
-newfile="ontoGoldAll.key"
+newfile="ontoGoldAll23.key"
 #g=open(newfile,"w")
 #g.close()
 
