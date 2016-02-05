@@ -1,11 +1,14 @@
 #default properties without special setting for the dcoref
-<code>
+
 java -cp "*" -Xmx2g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma,ner,parse,dcoref -outputFormat conll  -tokenize.whitespace -ssplit.eolonly -file input.txt
-</code>
+
+
+
+
 
 
 #settings for dcoref
-<code>
+
 dcoref.demonym                   // The path for a file that includes a list of demonyms 
 dcoref.animate                   // The list of animate/inanimate mentions (Ji and Lin, 2009)
 dcoref.inanimate 
@@ -27,14 +30,27 @@ dcoref.replicate.conll = false   // Turn on this for replicating conllst result
 
 sievePasses                      // Sieve passes - each class is defined in dcoref/sievepasses/
                                  // If omitted, the default sieves will be used (recommended).							 
-</code>					 
+					 
+
+
+
+
+
+
 #use seievePasses to replicate conll2012 results
-<code>
+
 java -cp "*" -Xmx8g edu.stanford.nlp.dcoref.SieveCoreferenceSystem -props coref.properties
-</code>
+
+
+
+
+
+
+
+
 
 #for replicating result settings:
-<code>
+
 # annotators needed for coreference resolution
 annotators = pos, lemma, ner, parse    
 
@@ -64,4 +80,3 @@ dcoref.logFile = /PATH/FOR/LOGS
 # dcoref.mucfile: path for the MUC file
 dcoref.conll2011 = /PATH/FOR/CORPUS
 
-</code>
