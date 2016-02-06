@@ -9,7 +9,7 @@ do
 	firstname="${filename%.*}"
 	xmlfile=$firstname".xml"
 	#newfile=$firstname"_dcoref.conll"
-	newfile="sec23_newSetting.conll"
+	newfile=$1
 	echo $newfile
 	#python processGold.py $filename | python ontoConvertConll.py - >> $newfile
 	python coreNLP_conll.py $filename $xmlfile >> $newfile 

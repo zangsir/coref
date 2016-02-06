@@ -71,10 +71,12 @@ def modify_labels(start,end):
     num_b=map(int, nums_b[:-1])
     a=re.findall("\(\d+",start)
     aa=re.findall("\d+\)",end)
+    #print a,aa
     for i in a:
-        m=re.search('\d',i)
+        m=re.search('\d+',i)
         b=int(m.group())
         if b in num_b:
+            #print 'found ', b
             a.remove(i)
             a.append(i)
             b_pos=num_b.index(b)
@@ -101,6 +103,7 @@ def mergeLabels(x,y):
         newlabel=x
     else:
         x_mod,y_mod=modify_labels(x,y)
+        #print "=========xmod,ymod: ", x_mod,y_mod
         a=x.count("(")
         b=y.count(")")
         if a<b:
