@@ -75,8 +75,8 @@ Then after putting both conll files and xml files (the same doc should have same
 
 This will write output the complete conll file on the stdout. 
 
-If you wish to do batch processing, i.e., read a directory of OntoNotes plain text files, then you can use the bash shell script provided:
+If you wish to do batch processing, i.e., read a directory of OntoNotes plain text files, then you can use the bash shell script provided(after making it executable), specifying the name of the output file on the command line:
 
-<code> $ exec ./coreNLPConll.sh </code>
+<code> $ ./coreNLPConll.sh newOutput.conll </code>
 
 And this will write complete conll output for all documents into one output conll file, approprite for evaluation using the conll11,12 shared task scorer script. In the big output file, each document is marked by comments for beginning and ending of the document.
