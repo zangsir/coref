@@ -37,14 +37,15 @@ def get_doc_conll(outline):
     doc_conll=[]
     for line in outline:
         tok_id=str(count)
-        if line!="\r" and line!='':
+        if line!="\r" and line!='' and line!=' ':
             this_line=str(sent_count) + "\t" + tok_id + '\t' + line.split('\t')[0] + '\t' + line.split('\t')[1]
             #print this_line
             doc_conll.append(this_line)
             count+=1
             #print count
 
-        elif line=='\r':
+        #elif line=='\r' or line=='' or line==' ':
+        else:
             #this_line=str(sent_count) + '\t' + tok_id + '\t' + line
             #print this_line
             sent_count+=1
@@ -124,6 +125,8 @@ for row in doc_conll:
     row_list=row.split('\t')
     tup=(row_list[0],row_list[2])
     start,end=get_symbols(start_dict,start_dict_dup,end_dict,end_dict_dup,tup)
+    #turn this on to debug and see if labels are merged right
+    #print start,end 
     coref_col=mergeLabels(start,end)
     row_list.append(coref_col)
     conll_list=[row_list[1],row_list[3],row_list[4]]

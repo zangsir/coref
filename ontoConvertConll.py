@@ -62,7 +62,34 @@ def generateLabels(positions,mode,nlist):
     for i in newlist:
         stags[i[0]]=i[1]    
     return stags
+
+
+def modify_labels(start,end):
+    """turn end into a list of numbers and turn start into a list of \(\d and check if \
+    any number of start is in end, for example, (3 and 1)3) will turn into (3 and 3)1) so that it is merged in the right order"""
+    nums_b=end.split(')')
+    num_b=map(int, nums_b[:-1])
+    a=re.findall("\(\d+",start)
+    aa=re.findall("\d+\)",end)
+    for i in a:
+        m=re.search('\d',i)
+        b=int(m.group())
+        if b in num_b:
+            a.remove(i)
+            a.append(i)
+            b_pos=num_b.index(b)
+            ins=aa[b_pos]
+            del aa[b_pos]
+            aa.insert(0,ins)
+            break
     
+    start_mod=''.join(a)
+    #print start_mod
+    end_mod=''.join(aa)
+    #print end_mod
+    return start_mod,end_mod
+
+
 #merge labels
 def mergeLabels(x,y):
     """take a pair of labels (start, end) and output the merged label"""
@@ -73,12 +100,13 @@ def mergeLabels(x,y):
     elif x!="_" and y=="_":
         newlabel=x
     else:
+        x_mod,y_mod=modify_labels(x,y)
         a=x.count("(")
         b=y.count(")")
         if a<b:
-            newlabel="("+y
+            newlabel="("+y_mod
         else:
-            newlabel=x+")"
+            newlabel=x_mod+")"
     return newlabel
     
 

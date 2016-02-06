@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in coreNLPConll/*.conll
+for i in coreNLP-conll/*.conll
 
 do
 	filename=$i
@@ -8,8 +8,10 @@ do
 	extension="${filename##*.}"
 	firstname="${filename%.*}"
 	xmlfile=$firstname".xml"
-	newfile=$firstname"_dcoref.conll"
+	#newfile=$firstname"_dcoref.conll"
+	newfile="sec23_new.conll"
 	echo $newfile
 	#python processGold.py $filename | python ontoConvertConll.py - >> $newfile
 	python coreNLP_conll.py $filename $xmlfile >> $newfile 
+	echo "all files wrote to " $newfile
 done
