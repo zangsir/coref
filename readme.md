@@ -65,7 +65,7 @@ Currently there is no easy way to output coref chains from dcoref using Stanford
 
 Usage:
 
-The pipeline here is to first obtain the conll and xml output from Stanford coreNLP using dcoref, and then put them together. TO get the conll and xml output first, you can modify and use the shell script provided:
+The pipeline here is to first obtain the conll and xml output from Stanford coreNLP using dcoref, and then put them together. TO get the conll and xml output first, you can modify and use the shell script provided (be sure to modify the dir that stores all the input plain text files, and the outputFormat parameter to either 'conll' or 'xml'):
 
 <code> $ exec ./batch_coreNLP.sh </code>
 
