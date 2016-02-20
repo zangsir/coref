@@ -64,20 +64,10 @@ def merge_entity_labels(x,y):
     if x=="_" and y=="_":
         newlabel="*"
     elif x=="_" and y!="_":
-        #y0=y.split(')')[0]
-        #print 'y0:',y0
-        #if stack[-1]==y0:
-        #    newlabel='*)'
-        #    stack.pop()
-        #else:
-        #    newlabel='*'
         newlabel=re.sub(r'[a-zA-z]+',r'*',y)
     elif x!="_" and y=="_":
-        all_x=x.split('(')
-        newlabel=''
-        for i in all_x[1:]:
-            newlabel=newlabel+'('+i + "*"
-        #stack.append(first_x)
+        mod_x=proc_slabel(x)
+        newlabel=''.join(mod_x)
     else:
         #both x and y has some label
         #y is not '_', so it must have some blah) form, so m is not None
@@ -88,61 +78,78 @@ def merge_entity_labels(x,y):
         ele_y=set(y.split(')'))
         if ele_x==ele_y and len(x)==len(y):
             #exactly one entity on this tok and of same length
-            newlabel='('+x.split('(')[-1]+')'
+            newlabel='('+x.split('(')[-1]+'*)'
         
         if len(x)>len(y):
             #likely: (animal(person  person) or (animal animal)person)
             if m.group(1)==n.group(2):
-                newlabel=n.group(1)[:-1]+"*"+"("+y
+                mod_x=proc_slabel(x)
+                newlabel=''.join(mod_x) + ')' + "*)" * (y.count(')')-1)
             else:
-                newlabel=x+"*"+m.group(2)
+                #(animal(object(person abstract)plant)
+                mod_x=proc_slabel(x)
+                newlabel=''.join(mod_x) + "*)"*y.count(')')
         elif len(x)<len(y):
             if m.group(1)!=n.group(2):
-                newlabel=x +"*)"*y.count(')')
+                mod_x=proc_slabel(x)
+                newlabel=''.join(mod_x) + "*)"*y.count(')')
             else:
-                newlabel=x + ')' + "*)" * (y.count(')')-1)
+                mod_x=proc_slabel(x)
+                newlabel=''.join(mod_x) + ')' + "*)" * (y.count(')')-1)
     return newlabel
     
-    
-    
-xmlFile=sys.argv[1]
-xmlcon = minidom.parse(xmlFile) 
-root=xmlcon.childNodes[0]
-rootn=root.childNodes[1]
-rootn.childNodes[1].toxml()
-nlist=traverse_node_entity(rootn)
-outputFormat=[]
-starts=[]
-for i in range(len(nlist)):
-    if re.search(r'\([a-zA-Z]+[^\)]',nlist[i]):
-        starts.append(i)
-ends=[]
-for i in range(len(nlist)):
-    if re.search(r'[^\(][a-zA-Z]+\)',nlist[i]):
-        ends.append(i)
-st=generateLabels(starts,1,nlist)
-ed=generateLabels(ends,-1,nlist)
+
+
+def proc_slabel(l):
+    """take a start label like (animal(object and return a list in a form of (animal*(object*"""
+    ele=l.split('(')[1:]
+    elements = ['('+element+'*' for element in ele]
+    #final=''.join(elements)
+    return elements
+
+
+
+
+
+if __name__ == "__main__":
+    xmlFile=sys.argv[1]
+    xmlcon = minidom.parse(xmlFile) 
+    root=xmlcon.childNodes[0]
+    rootn=root.childNodes[1]
+    rootn.childNodes[1].toxml()
+    nlist=traverse_node_entity(rootn)
+    outputFormat=[]
+    starts=[]
+    for i in range(len(nlist)):
+        if re.search(r'\([a-zA-Z]+[^\)]',nlist[i]):
+            starts.append(i)
+    ends=[]
+    for i in range(len(nlist)):
+        if re.search(r'[^\(][a-zA-Z]+\)',nlist[i]):
+            ends.append(i)
+    st=generateLabels(starts,1,nlist)
+    ed=generateLabels(ends,-1,nlist)
     
 
-#debug
-#print nlist
-#for i in range(len(st)):
-#    print i,nlist[i], st[i],"|",ed[i],"|",merge_entity_labels(st[i],ed[i])
-#print "="*20
+    #debug
+    #print nlist
+    #for i in range(len(st)):
+    #    print i,nlist[i], st[i],"|",ed[i],"|",merge_entity_labels(st[i],ed[i])
+    #print "="*20
     
-counter=0
-stack=[]
-outputFormat=[]
+    counter=0
+    stack=[]
+    outputFormat=[]
 
-for i in range(len(nlist)):
-    no_output=re.search(r'\([a-zA-Z]+[^\)]|[^\(][a-zA-Z]+\)',nlist[i])
-    if not no_output:
-        merged=merge_entity_labels(st[i],ed[i])
-        #print nlist[i],st[i],ed[i],merged
-        tok=str(counter)+"\t"+nlist[i]+"\t"+merged
-        outputFormat.append(tok)
-        counter+=1
+    for i in range(len(nlist)):
+        no_output=re.search(r'\([a-zA-Z]+[^\)]|[^\(][a-zA-Z]+\)',nlist[i])
+        if not no_output:
+            merged=merge_entity_labels(st[i],ed[i])
+            #print nlist[i],st[i],ed[i],merged
+            tok=str(counter)+"\t"+nlist[i]+"\t"+merged
+            outputFormat.append(tok)
+            counter+=1
         
-for i in outputFormat:print i.encode('utf-8')
+    for i in outputFormat:print i.encode('utf-8')
 
-#print starts
+    #print starts
