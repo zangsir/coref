@@ -80,3 +80,12 @@ If you wish to do batch processing, i.e., read a directory of OntoNotes plain te
 <code> $ ./coreNLPConll.sh newOutput.conll </code>
 
 And this will write complete conll output for all documents into one output conll file, approprite for evaluation using the conll11,12 shared task scorer script. In the big output file, each document is marked by comments for beginning and ending of the document.
+
+
+<h2> 6. Extracting gold NER from GUM xml files to Conll format </h2>
+
+This is part of the training data that Berkley joint coref system needs. Use gum-ner.py for single files or modify a shell script to batch process. Expects the coref file on command line: 
+
+<code> $ python gum_ner.py onto-gum/GUM_interview_ants.coref </code>
+
+Output the conll file with id, tok, and NER columns. You can check that this output has the same number of tokens as the coref conll file on GUM repo by using the check_conll.py, before merging them or doing other processing.
