@@ -33,7 +33,7 @@ for row in doc_conll:
     tup=(row_list[0],row_list[2])
     start,end=get_symbols(start_dict,end_dict,tup)
     #turn this on to debug and see if labels are merged right
-    #print start,end 
+    #print start,end
     coref_col=mergeLabels(start,end)
     row_list.append(coref_col)
     conll_list=[row_list[1],row_list[3],row_list[4]]

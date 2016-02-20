@@ -5,4 +5,4 @@ import sys
 file=sys.argv[1]
 cf=prep.mainPreprocess(file)
 ps=cf.toprettyxml()
-print ps
+print ps.encode('utf-8')

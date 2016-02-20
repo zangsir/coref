@@ -106,10 +106,32 @@ def mergeLabels(x,y):
         #print "=========xmod,ymod: ", x_mod,y_mod
         a=x.count("(")
         b=y.count(")")
+        x_nums=x_mod.split('(')
+        y_nums=y_mod.split(")")
+
+        # (3 4)5) , (3 3)5) , (3(41 41)5)6)
         if a<b:
-            newlabel="("+y_mod
-        else:
-            newlabel=x_mod+")"
+            if x_nums[-1]==y_nums[0]:
+                newlabel="("+y_mod
+            else:
+                newlabel=x_mod + " " + y_mod
+        elif a>b:
+            if x_nums[-1]==y_nums[0]:
+                newlabel=x_mod+")"
+            else:
+                newlabel=x_mod + " " + y_mod
+        #(3(4 4)5) or (3(4 5)6) or (5 5)
+        elif a==b:
+            if x_nums[-1]==y_nums[0]:
+                if len(x_nums)==1:
+                    newlabel=x_mod
+                    for g in y_nums[1:]:
+                        newlabel=newlabel+g+')'
+                else:
+                    newlabel=x_mod+')'
+            else:
+                newlabel=x_mod + " " + y_mod
+                
     return newlabel
     
 
