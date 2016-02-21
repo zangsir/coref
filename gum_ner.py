@@ -64,10 +64,11 @@ def merge_entity_labels(x,y):
     if x=="_" and y=="_":
         newlabel="*"
     elif x=="_" and y!="_":
-        newlabel=re.sub(r'[a-zA-z]+',r'*',y)
+        newlabel='*' + ")"*y.count(')')
     elif x!="_" and y=="_":
-        mod_x=proc_slabel(x)
-        newlabel=''.join(mod_x)
+        #mod_x=proc_slabel(x)
+        #newlabel=''.join(mod_x)
+        newlabel=x+'*'
     else:
         #both x and y has some label
         #y is not '_', so it must have some blah) form, so m is not None
@@ -83,19 +84,17 @@ def merge_entity_labels(x,y):
         if len(x)>len(y):
             #likely: (animal(person  person) or (animal animal)person)
             if m.group(1)==n.group(2):
-                mod_x=proc_slabel(x)
-                newlabel=''.join(mod_x) + ')' + "*)" * (y.count(')')-1)
+                #mod_x=proc_slabel(x)
+                newlabel= x+ '*' + ")" * y.count(')')
             else:
                 #(animal(object(person abstract)plant)
-                mod_x=proc_slabel(x)
-                newlabel=''.join(mod_x) + "*)"*y.count(')')
+                newlabel=x + '*' + ")"*y.count(')')
         elif len(x)<len(y):
             if m.group(1)!=n.group(2):
-                mod_x=proc_slabel(x)
-                newlabel=''.join(mod_x) + "*)"*y.count(')')
+                newlabel=x + '*' + ")"*y.count(')')
             else:
-                mod_x=proc_slabel(x)
-                newlabel=''.join(mod_x) + ')' + "*)" * (y.count(')')-1)
+                #(animal animal)person)
+                newlabel=x + '*' + ")" * y.count(')')
     return newlabel
     
 
